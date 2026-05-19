@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tzatziki - Hudson's Ale House — Order Form</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; font-size: 16px; }
+.header { background: #1a3a2a; color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.header-logo { height: 64px; width: auto; background: white; border-radius: 6px; padding: 4px 10px; flex-shrink: 0; }
+.customer-name { flex: 1; text-align: center; font-size: 15px; font-weight: 600; color: white; line-height: 1.3; }
+.order-count { background: #e8894a; color: white; border-radius: 20px; padding: 5px 14px; font-size: 14px; font-weight: 600; flex-shrink: 0; white-space: nowrap; }
+table { width: 100%; border-collapse: collapse; background: white; margin-top: 2px; }
+th { background: #f0ece4; padding: 12px 16px; text-align: left; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5a5a; border-bottom: 2px solid #e0d8cc; }
+td { padding: 10px 16px; border-bottom: 1px solid #f0ece4; vertical-align: middle; }
+tr:hover { background: #faf8f5; }
+.product-inner { display: flex; align-items: center; gap: 12px; }
+.product-img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; flex-shrink: 0; }
+.product-img-placeholder { width: 64px; height: 64px; border-radius: 8px; background: #f0ece4; flex-shrink: 0; }
+.product-details { flex: 1; }
+a.product-name { font-size: 15px; font-weight: 600; color: #1a3a2a; text-decoration: none; display: block; line-height: 1.4; }
+a.product-name:hover { text-decoration: underline; color: #e8894a; }
+.product-meta { color: #666; font-size: 13px; margin-top: 3px; }
+.product-sku { color: #aaa; font-size: 12px; margin-top: 2px; font-family: monospace; }
+.qty-cell { width: 90px; }
+.qty-input { width: 75px; padding: 10px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 18px; text-align: center; -webkit-appearance: none; -moz-appearance: textfield; }
+.qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.qty-input:focus { border-color: #2d5a3d; outline: none; background: #f0f8f4; }
+.qty-input[value]:not([value="0"]) { border-color: #e8894a; background: #fff8f4; }
+.notes-section { padding: 16px 24px 100px; background: white; border-top: 1px solid #f0ece4; }
+.notes-label { font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+.notes-input { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 15px; resize: vertical; min-height: 80px; font-family: inherit; }
+.notes-input:focus { border-color: #2d5a3d; outline: none; }
+.send-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #25D366; color: white; border: none; padding: 17px 44px; border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px; z-index: 200; white-space: nowrap; font-family: inherit; }
+.send-btn:active { transform: translateX(-50%) scale(0.97); }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <img src="https://github.com/Aristonfoods/orders/blob/main/images/logo-png-Recovered.png?raw=true" class="header-logo" onerror="this.style.display='none'" alt="Ariston Foods">
+    <div class="customer-name">Tzatziki - Hudson's Ale House — Order Form</div>
+    <div class="order-count" id="order-count">0 items</div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>Product</th><th>Qty</th></tr></thead>
+  <tbody>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/12/Greek%20Pitta%20Bread%20Round%20(18cm)%2010pcs%20x%2012%20(Kolios).png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Pitta Bread Greek 18cm"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/pitta-bread-greek-18cm-12-x-10pcs-kolios/" target="_blank">Pitta Bread - Greek (Kolios)</a>
+            <div class="product-meta">18cm, 12 x 10pcs</div>
+            <div class="product-sku">SKU: 26-02-11</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Pitta Bread - Greek (18cm, 12 x 10pcs) (Kolios)" data-sku="26-02-11"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/fetadoxeio.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Feta Cheese PDO"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/feta-cheese-pdo-14kg-tahas/" target="_blank">Feta Cheese P.D.O (Tahas)</a>
+            <div class="product-meta">Tin of 14kg</div>
+            <div class="product-sku">SKU: 15-05-05</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Feta Cheese P.D.O (14kg) (Tahas)" data-sku="15-05-05"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/doxeio-fetas-me-plegma-4kg-dealers.gr.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Feta Cheese PDO Sliced"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/feta-cheese-pdo-4kg-100g-slices-tahas/" target="_blank">Feta Cheese P.D.O - Sliced (Tahas)</a>
+            <div class="product-meta">4kg, 100g slices</div>
+            <div class="product-sku">SKU: 15-05-15</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Feta Cheese P.D.O (4kg, 100g slices) (Tahas)" data-sku="15-05-15"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://github.com/Aristonfoods/orders/blob/main/images/Gouda%20Cheese%2048%25%20(Alda)%20Block.jpg?raw=true" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Gouda Block Alda"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/gouda-german-cheese-block-alda/" target="_blank">Gouda - German Cheese Block (Alda)</a>
+            <div class="product-meta">Block <span style="color:#888;font-size:12px">(variable weight — sold by box)</span></div>
+            <div class="product-sku">SKU: 15-12-35</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Gouda - German Cheese Block (Alda)" data-sku="15-12-35"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://github.com/Aristonfoods/orders/blob/main/images/Kefalotiri%20(Sahanaki)%20Block%20%20Alda.jpg?raw=true" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Kefalotyri Alda"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/kefalotyri-danish-loaf-alda/" target="_blank">Kefalotyri Danish Loaf (Alda)</a>
+            <div class="product-meta">Block <span style="color:#888;font-size:12px">(variable weight — sold by box)</span></div>
+            <div class="product-sku">SKU: 15-12-16</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kefalotyri Danish Loaf (Alda)" data-sku="15-12-16"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2026/05/ALEXANDER-EDESMA500x500-_5-kg.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Edesma Alexander"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/edesma-5kg-alexander/" target="_blank">Edesma (Alexander)</a>
+            <div class="product-meta">5kg</div>
+            <div class="product-sku">SKU: 15-19-75</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Edesma (5kg) (Alexander)" data-sku="15-19-75"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2026/05/Green-Olives-Pitted-500x500-1.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Green Olives Pitted 10kg Tin"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/green-olives-pitted-m-101-110-10kg-tin/" target="_blank">Green Olives Pitted M (101-110) - Tin</a>
+            <div class="product-meta">10kg Tin</div>
+            <div class="product-sku">SKU: 21-25-14</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Green Olives Pitted M (101-110)10kg Tin" data-sku="21-25-14"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/12/Kalamata%20Olives%20Whole.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Kalamata Olives Whole Giant"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/kalamata-olives-whole-giant-141-160-10kg/" target="_blank">Kalamata Olives - Whole Giant</a>
+            <div class="product-meta">10kg</div>
+            <div class="product-sku">SKU: 21-01-10</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kalamata Olives - Whole Giant (10kg)" data-sku="21-01-10"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Oregano-1.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Oregano"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/oregano-1kg-bag-greek/" target="_blank">Oregano</a>
+            <div class="product-meta">1kg Bag (Greek)</div>
+            <div class="product-sku">SKU: 39-01-05</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Oregano (1kg)" data-sku="39-01-05"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Bougatsa%20Thessaloniki%20with%20Cheese%2020%20x%20500g.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Bougatsa Cream"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/bougatsa-cream-35-x-230g/" target="_blank">Bougatsa - Cream</a>
+            <div class="product-meta">35 x 230g</div>
+            <div class="product-sku">SKU: 10-12-08</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Bougatsa - Cream (35 x 230g)" data-sku="10-12-08"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Mini%20Filo%20Spiral%20Pie%20with%20Cheese%20(40g)%201%20x%208kg.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Mini Filo Spiral Cheese"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/mini-filo-pastries-spiral-cheese-1-x-8kg/" target="_blank">Mini Filo Pastries - Spiral - Cheese</a>
+            <div class="product-meta">1 x 8kg</div>
+            <div class="product-sku">SKU: 10-08-46</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mini Filo Pastries - Spiral - Cheese (1 x 8kg)" data-sku="10-08-46"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Mini%20Filo%20Spiral%20Pie%20with%20Spinach%20&%20Cheese%20(40g)%201%20x%208kg.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Mini Filo Spiral Spinach Cheese"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/mini-filo-pastries-spiral-spinach-cheese-1-x-8kg/" target="_blank">Mini Filo Pastries - Spiral - Spinach &amp; Cheese</a>
+            <div class="product-meta">1 x 8kg</div>
+            <div class="product-sku">SKU: 10-08-40</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mini Filo Pastries - Spiral - Spinach & Cheese (1 x 8kg)" data-sku="10-08-40"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2026/01/Fillo%20Pastry%2010%20x%201000g.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Filo Pastry Sheets"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/filo-pastry-sheets-10-x-1kg/" target="_blank">Filo Pastry Sheets</a>
+            <div class="product-meta">10 x 1kg</div>
+            <div class="product-sku">SKU: 10-14-05</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Filo Pastry Sheets (10 x 1kg)" data-sku="10-14-05"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Peinirli-Base-24cm-110g-ea-56-pcs-per-box-Kolios.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Peinirli Base Kolios"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/peinirli-base-24cm-110g-56pcs-kolios/" target="_blank">Peinirli Base (Kolios)</a>
+            <div class="product-meta">24cm, 110g, 56pcs per box</div>
+            <div class="product-sku">SKU: 10-14-10</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Peinirli Base 24cm, 110g ea (56 pcs per box) (Kolios)" data-sku="10-14-10"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/b-Moussaka-Vegetarian-400g-POT.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Moussaka Vegetarian Clay Pot"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/moussaka-vegetarian-clay-pot-6-x-400g/" target="_blank">Moussaka - Vegetarian in Clay Pot</a>
+            <div class="product-meta">6 x 400g</div>
+            <div class="product-sku">SKU: 13-06-05</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Moussaka Vegetarian in Clay Pot 6 x 400g" data-sku="13-06-05"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/10/Tahini.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Tahini Haitoglou"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/tahini-5kg-haitoglou/" target="_blank">Tahini (Haitoglou)</a>
+            <div class="product-meta">5kg</div>
+            <div class="product-sku">SKU: 27-02-73</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Tahini 5kg (Haitoglou)" data-sku="27-02-73"></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="notes-section">
+  <div class="notes-label">Notes / Special requests</div>
+  <textarea class="notes-input" id="notes" placeholder="Any special requests or notes..."></textarea>
+</div>
+
+<button class="send-btn" onclick="sendOrder()">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.844L0 24l6.337-1.501A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.013-1.374l-.36-.214-3.727.882.938-3.62-.234-.373A9.818 9.818 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+  Send Order via WhatsApp
+</button>
+
+<script>
+document.querySelectorAll('.qty-input').forEach(input => {
+  input.addEventListener('input', function() {
+    updateCount();
+    if (this.value && this.value != '0') { this.setAttribute('value', this.value); }
+    else { this.removeAttribute('value'); }
+  });
+});
+
+function updateCount() {
+  let count = 0;
+  document.querySelectorAll('.qty-input').forEach(input => {
+    if (input.value && parseFloat(input.value) > 0) count++;
+  });
+  document.getElementById('order-count').textContent = count + (count === 1 ? ' item' : ' items');
+}
+
+function sendOrder() {
+  let lines = [];
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseFloat(input.value);
+    if (qty > 0) {
+      const sku = input.getAttribute('data-sku');
+      const product = input.getAttribute('data-product');
+      const skuPart = sku ? ' [' + sku + ']' : '';
+      lines.push('• ' + product + skuPart + ' x' + qty);
+    }
+  });
+  if (lines.length === 0) { alert('Please add quantities to at least one product.'); return; }
+  const notes = document.getElementById('notes').value;
+  let message = "ORDER - Tzatziki - Hudson's Ale House\nDate: " + new Date().toLocaleDateString('en-GB') + "\n\n" + lines.join('\n');
+  if (notes) message += '\n\nNotes: ' + notes;
+  window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+}
+</script>
+</body>
+</html>

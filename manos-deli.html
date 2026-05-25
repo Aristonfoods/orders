@@ -489,7 +489,7 @@ function sendOrder() {
     if (qty > 0) {
       const sku = input.getAttribute('data-sku');
       const product = input.getAttribute('data-product');
-     lines.push('*x' + qty + '* ' + lines.push('*x' + qty + '* ' + sku + ' ' + product); + ' ' + product);
+     lines.push('*x' + qty + '* ' + sku + ' ' + product);
     }
   });
   if (lines.length === 0) { alert('Please add quantities to at least one product.'); return; }

@@ -232,19 +232,7 @@ a.product-name:hover { text-decoration: underline; color: #e8894a; }
       </td>
       <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Triangular - Feta (35 x 220g)" data-sku="10-00-41"></td>
     </tr>
-    <tr>
-      <td class="product-cell">
-        <div class="product-inner">
-          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Puff-Pastry-Pie---Half-Moon---Feta-(50-x-205g).png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Puff Pastry Pie"><div class="product-img-placeholder" style="display:none"></div>
-          <div class="product-details">
-            <a class="product-name" href="https://aristonfoods.co.uk/product/puff-pastry-pie-half-moon-feta-50-x-205g/" target="_blank">Puff Pastry Pie - Half Moon - Feta</a>
-            <div class="product-meta">50 x 205g</div>
-            <div class="product-sku">SKU: 10-05-52</div>
-          </div>
-        </div>
-      </td>
-      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Puff Pastry Pie - Half Moon - Feta (50 x 205g)" data-sku="10-05-52"></td>
-    </tr>
+
 
   </tbody>
 </table>
@@ -284,7 +272,7 @@ function sendOrder() {
       const sku = input.getAttribute('data-sku');
       const product = input.getAttribute('data-product');
       const skuPart = sku ? ' [' + sku + ']' : '';
-     lines.push('*x' + qty + '* ' + skuPart + ' ' + product);
+      lines.push('• ' + product + skuPart + ' x' + qty);
     }
   });
   if (lines.length === 0) { alert('Please add quantities to at least one product.'); return; }

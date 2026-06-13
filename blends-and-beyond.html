@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blends & Beyond Ltd — Order Form</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; font-size: 16px; }
+.header { background: #1a3a2a; color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.header-logo { height: 64px; width: auto; background: white; border-radius: 6px; padding: 4px 10px; flex-shrink: 0; }
+.customer-name { flex: 1; text-align: center; font-size: 15px; font-weight: 600; color: white; line-height: 1.3; }
+.order-count { background: #e8894a; color: white; border-radius: 20px; padding: 5px 14px; font-size: 14px; font-weight: 600; flex-shrink: 0; white-space: nowrap; }
+table { width: 100%; border-collapse: collapse; background: white; margin-top: 2px; }
+th { background: #f0ece4; padding: 12px 16px; text-align: left; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5a5a; border-bottom: 2px solid #e0d8cc; }
+td { padding: 10px 16px; border-bottom: 1px solid #f0ece4; vertical-align: middle; }
+tr:hover { background: #faf8f5; }
+.product-inner { display: flex; align-items: center; gap: 12px; }
+.product-img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; flex-shrink: 0; }
+.product-img-placeholder { width: 64px; height: 64px; border-radius: 8px; background: #f0ece4; flex-shrink: 0; }
+.product-details { flex: 1; }
+a.product-name { font-size: 15px; font-weight: 600; color: #1a3a2a; text-decoration: none; display: block; line-height: 1.4; }
+a.product-name:hover { text-decoration: underline; color: #e8894a; }
+.product-meta { color: #666; font-size: 13px; margin-top: 3px; }
+.product-sku { color: #aaa; font-size: 12px; margin-top: 2px; font-family: monospace; }
+.qty-cell { width: 90px; }
+.qty-input { width: 75px; padding: 10px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 18px; text-align: center; -webkit-appearance: none; -moz-appearance: textfield; }
+.qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.qty-input:focus { border-color: #2d5a3d; outline: none; background: #f0f8f4; }
+.qty-input[value]:not([value="0"]) { border-color: #e8894a; background: #fff8f4; }
+.notes-section { padding: 16px 24px 100px; background: white; border-top: 1px solid #f0ece4; }
+.notes-label { font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+.notes-input { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 15px; resize: vertical; min-height: 80px; font-family: inherit; }
+.notes-input:focus { border-color: #2d5a3d; outline: none; }
+.send-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #25D366; color: white; border: none; padding: 17px 44px; border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px; z-index: 200; white-space: nowrap; font-family: inherit; }
+.send-btn:active { transform: translateX(-50%) scale(0.97); }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <img src="https://github.com/Aristonfoods/orders/blob/main/images/logo-png-Recovered.png?raw=true" class="header-logo" onerror="this.style.display='none'" alt="Ariston Foods">
+    <div class="customer-name">Blends &amp; Beyond Ltd — Order Form</div>
+    <div class="order-count" id="order-count">0 items</div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>Product</th><th>Qty</th></tr></thead>
+  <tbody>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2026/02/Isio-Sokolata.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Petit Four Chocolate Jam"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/petit-four-long-chocolate-jam-4kg/" target="_blank">Petit Four - Long - Chocolate &amp; Jam</a>
+            <div class="product-meta">4kg</div>
+            <div class="product-sku">SKU: 26-50-06</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Petit Four - Long - Chocolate & Jam (4kg) (69)" data-sku="26-50-06"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Petit-Four-Chocolate-Peanut-4kg.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Petit Four Chocolate Peanut Jam"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/petit-four-long-chocolate-peanut-jam-4kg/" target="_blank">Petit Four - Long - Chocolate, Peanut &amp; Jam</a>
+            <div class="product-meta">4kg</div>
+            <div class="product-sku">SKU: 26-50-09</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Petit Four - Long - Chocolate, Peanut & Jam (4kg) (32)" data-sku="26-50-09"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Country-Filo-Pie-Round-with-Chicken-10pcs-5-x-2.5kg.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Country Filo Pie Round Chicken"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/country-filo-pie-round-chicken-5-x-2-5kg-10pcs/" target="_blank">Country Filo Pie - Round - Chicken</a>
+            <div class="product-meta">5 x 2.5kg, 10pcs</div>
+            <div class="product-sku">SKU: 10-00-20</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Round - Chicken (5 x 2.5kg, 10 pcs)" data-sku="10-00-20"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2026/01/Potato-vegan-10-00-50.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Country Filo Pie Stick Vegan Potato"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/country-filo-pie-stick-vegan-potato-40-x-215g/" target="_blank">Country Filo Pie - Stick - Vegan Potato</a>
+            <div class="product-meta">40 x 215g</div>
+            <div class="product-sku">SKU: 10-00-50</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Stick - Vegan Potato (40 x 215g)" data-sku="10-00-50"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/12/Country%20Filo%20Pie%20Triangular%20with%20Feta%20Cheese%2035%20x%20220g.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Country Filo Pie Triangular Feta"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/country-filo-pie-triangular-feta-35-x-220g/" target="_blank">Country Filo Pie - Triangular - Feta</a>
+            <div class="product-meta">35 x 220g</div>
+            <div class="product-sku">SKU: 10-00-41</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Triangular - Feta (35 x 220g)" data-sku="10-00-41"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/10-00-40-Country-Filo-Pie-Triangular-with-Spinach-and-Feta-Cheese-35x220g.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Country Filo Pie Triangular Spinach Feta"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/country-filo-pie-triangular-spinach-feta-35-x-220g/" target="_blank">Country Filo Pie - Triangular - Spinach &amp; Feta</a>
+            <div class="product-meta">35 x 220g</div>
+            <div class="product-sku">SKU: 10-00-40</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Triangular - Spinach & Feta (35 x 220g)" data-sku="10-00-40"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/10/Ham%20&%20Gouda%20Croissant%20pastry%2045%20x%20210g.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Croissant Ham Gouda"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/croissant-ham-gouda-45-x-210g/" target="_blank">Croissant - Ham &amp; Gouda</a>
+            <div class="product-meta">45 x 210g</div>
+            <div class="product-sku">SKU: 10-29-10</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Croissant - Ham & Gouda (45 x 210g)" data-sku="10-29-10"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2025/12/Koulouri%20with%20Philadelphia%20Cheese%2030%20x%20200g.jpg" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Koulouri Philadelphia Cheese"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/koulouri-philadelphia-cheese-30-x-200g/" target="_blank">Koulouri - Philadelphia Cheese</a>
+            <div class="product-meta">30 x 200g</div>
+            <div class="product-sku">SKU: 10-31-11</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Koulouri - Philadelphia Cheese (30 x 200g)" data-sku="10-31-11"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Mini-rolls-with-Feta-50g-info-500x500-1.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Mini Filo Rolls Feta"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/mini-filo-rolls-feta-1-x-5kg/" target="_blank">Mini Filo Rolls - Feta</a>
+            <div class="product-meta">1 x 5kg</div>
+            <div class="product-sku">SKU: 10-08-10</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mini Filo Rolls - Feta (1 x 5kg)" data-sku="10-08-10"></td>
+    </tr>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/59487.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Mini Filo Rolls Spinach Feta"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/mini-filo-rolls-spinach-feta-1-x-5kg/" target="_blank">Mini Filo Rolls - Spinach &amp; Feta</a>
+            <div class="product-meta">1 x 5kg</div>
+            <div class="product-sku">SKU: 10-08-03</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mini Filo Rolls - Spinach & Feta (1 x 5kg)" data-sku="10-08-03"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img src="https://aristonfoods.co.uk/wp-content/uploads/2024/06/SP_NOST_PRODUCT_0000_Layer-9-1.png" class="product-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" alt="Bougatsa Cream"><div class="product-img-placeholder" style="display:none"></div>
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/" target="_blank">Bougatsa - Cream</a>
+            <div class="product-meta">35 x 230g</div>
+            <div class="product-sku">SKU: 10-12-08</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Bougatsa - Cream (35 x 230g)" data-sku="10-12-08"></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="notes-section">
+  <div class="notes-label">Notes / Special requests</div>
+  <textarea class="notes-input" id="notes" placeholder="Any special requests or notes..."></textarea>
+</div>
+
+<button class="send-btn" onclick="sendOrder()">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.844L0 24l6.337-1.501A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.013-1.374l-.36-.214-3.727.882.938-3.62-.234-.373A9.818 9.818 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+  Send Order via WhatsApp
+</button>
+
+<script>
+document.querySelectorAll('.qty-input').forEach(input => {
+  input.addEventListener('input', function() {
+    updateCount();
+    if (this.value && this.value != '0') { this.setAttribute('value', this.value); }
+    else { this.removeAttribute('value'); }
+  });
+});
+
+function updateCount() {
+  let count = 0;
+  document.querySelectorAll('.qty-input').forEach(input => {
+    if (input.value && parseFloat(input.value) > 0) count++;
+  });
+  document.getElementById('order-count').textContent = count + (count === 1 ? ' item' : ' items');
+}
+
+function sendOrder() {
+  let lines = [];
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseFloat(input.value);
+    if (qty > 0) {
+      const sku = input.getAttribute('data-sku');
+      const product = input.getAttribute('data-product');
+      const skuPart = sku ? ' [' + sku + ']' : '';
+      lines.push('• ' + product + skuPart + ' x' + qty);
+    }
+  });
+  if (lines.length === 0) { alert('Please add quantities to at least one product.'); return; }
+  const notes = document.getElementById('notes').value;
+  let message = "ORDER - Blends & Beyond Ltd\nDate: " + new Date().toLocaleDateString('en-GB') + "\n\n" + lines.join('\n');
+  if (notes) message += '\n\nNotes: ' + notes;
+  window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+}
+</script>
+</body>
+</html>

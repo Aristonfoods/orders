@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greek Orthodox Church of the Virgin Mary — Order Form</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; font-size: 16px; }
+.header { background: #1a3a2a; color: white; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.order-count { background: #e8894a; color: white; border-radius: 20px; padding: 5px 14px; font-size: 14px; font-weight: 600; }
+.customer-name { font-size: 14px; color: rgba(255,255,255,0.7); }
+table { width: 100%; border-collapse: collapse; background: white; margin-top: 2px; }
+th { background: #f0ece4; padding: 12px 16px; text-align: left; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: #5a5a5a; border-bottom: 2px solid #e0d8cc; }
+td { padding: 10px 16px; border-bottom: 1px solid #f0ece4; vertical-align: middle; }
+tr:hover { background: #faf8f5; }
+.product-inner { display: flex; align-items: center; gap: 12px; }
+.product-img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; flex-shrink: 0; }
+.product-img-placeholder { width: 64px; height: 64px; border-radius: 8px; background: #f0ece4; flex-shrink: 0; }
+.product-details { flex: 1; }
+.product-name { font-size: 15px; font-weight: 600; color: #1a3a2a; line-height: 1.4; }
+a.product-name { text-decoration: none; display: block; }
+a.product-name:hover { text-decoration: underline; color: #e8894a; }
+.product-sku { color: #aaa; font-size: 12px; margin-top: 2px; font-family: monospace; }
+.product-meta { color: #666; font-size: 13px; margin-top: 3px; }
+.product-sku { color: #aaa; font-size: 12px; margin-top: 2px; font-family: monospace; }
+.qty-cell { width: 90px; }
+.qty-input { width: 75px; padding: 10px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 18px; text-align: center; -webkit-appearance: none; -moz-appearance: textfield; }
+.qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.qty-input:focus { border-color: #2d5a3d; outline: none; background: #f0f8f4; }
+.qty-input[value]:not([value="0"]) { border-color: #e8894a; background: #fff8f4; }
+.notes-section { padding: 16px 24px 100px; background: white; border-top: 1px solid #f0ece4; }
+.notes-label { font-size: 13px; color: #888; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+.notes-input { width: 100%; padding: 12px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 15px; resize: vertical; min-height: 80px; font-family: inherit; }
+.notes-input:focus { border-color: #2d5a3d; outline: none; }
+.send-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #25D366; color: white; border: none; padding: 17px 44px; border-radius: 50px; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(37,211,102,0.4); display: flex; align-items: center; gap: 10px; z-index: 200; white-space: nowrap; font-family: inherit; }
+.send-btn:active { transform: translateX(-50%) scale(0.97); }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div class="order-count" id="order-count">0 items</div>
+  </div>
+  <div class="customer-name">Greek Orthodox Church of the Virgin Mary — Order Form</div>
+</div>
+
+<table>
+  <thead><tr><th>Product</th><th>Qty</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Bread%20Koulouri%20(Dahtilo%20).jpeg" alt="Bread - Koulouri">
+          <div class="product-details">
+            <div class="product-name">Bread - Koulouri</div>
+            <div class="product-meta">Dahtulo</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Bread - Koulouri (Dahtulo)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Glistaria%20with%20Sesame.png" alt="Glistaria with Sesame">
+          <div class="product-details">
+            <div class="product-name">Glistaria with Sesame</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Glistaria with Sesame"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/09/Untitled-1.jpg" alt="Tahinopita">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/tahinopita/" target="_blank" rel="noopener">Tahinopita</a>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Tahinopita"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/VILLAGE-CYPRUS-FLOUR-1x10x1Kg-1.png" alt="Flour - Village Cyprus">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/flour-village-cyprus-10-x-1kg-thriambos/" target="_blank" rel="noopener">Flour - Village Cyprus</a>
+            <div class="product-meta">10 x 1kg, Thriambos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Flour - Village Cyprus (10 x 1kg, Thriambos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Lentils---Green-12x500g-(Anthos).png" alt="Lentils - Green 12 x 500g Anthos">
+          <div class="product-details">
+            <div class="product-name">Lentils - Green 12 x 500g Anthos</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Lentils - Green 12 x 500g Anthos"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/det_louvia.jpg" alt="Black eye Beans">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/black-eye-beans-1-x-400g-cyprus/" target="_blank" rel="noopener">Black eye Beans 1 x 400g Cyprus</a>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Black eye Beans 1 x 400g Cyprus"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Greek%20Coffee%20Charalampous%20Gold%2010%20x%20200g.jpg" alt="Coffee - Gold Blend">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/greek-coffee-gold-10-x-200g-gold-charalambous/" target="_blank" rel="noopener">Coffee - Gold Blend</a>
+            <div class="product-meta">10 x 200g, Charalambous</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Coffee - Gold Blend (10 x 200g, Charalambous)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Tahini%20430g%20Delphi.JPG" alt="Tahini Dip">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/tahini-dip-2kg-delphi/" target="_blank" rel="noopener">Tahini Dip</a>
+            <div class="product-meta">12 x 430g, Delphi</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Tahini Dip (12 x 430g, Delphi)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/d0a899778518bdfe4a21a6c70b9064704d381127-1000x1000.png" alt="Taramasalata Dip">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/pastitsio-400g-tub/" target="_blank" rel="noopener">Taramasalata Dip</a>
+            <div class="product-meta">12 x 430g, Delphi</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Taramasalata Dip (12 x 430g, Delphi)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Kolokasi.png" alt="Kolokasi">
+          <div class="product-details">
+            <div class="product-name">Kolokasi</div>
+            <div class="product-meta">per kg</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kolokasi (per kg)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Trahana%20Soup%2017x500g%20(Halloumas).jpg" alt="Trahana Soup">
+          <div class="product-details">
+            <div class="product-name">Trahana Soup 17 x 500g</div>
+            <div class="product-meta">Halloumas</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Trahana Soup 17 x 500g (Halloumas)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Halloumi%20Sheep%20and%20Goat%206x1kg%20(Anthos).jpg" alt="Halloumi Sheep and Goat">
+          <div class="product-details">
+            <div class="product-name">Halloumi Sheep and Goat 6 x 1kg</div>
+            <div class="product-meta">Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Halloumi Sheep and Goat 6 x 1kg (Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Halloumi%20(40%20x%20225g%2C%20Hadjipieris)" alt="Halloumi">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/halloumi-40-x-225g-hadjipieris/" target="_blank" rel="noopener">Halloumi</a>
+            <div class="product-meta">40 x 225g, Hadjipieris</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Halloumi (40 x 225g, Hadjipieris)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/05/Sausage%20Thin%20(%20Loukanika)%20CY%2014%20x%20210g%20vp%20(Gregoriou).jpeg" alt="Sausage - Thin (Loukanika)">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/sausage-thin-loukanika-14-x-210g-gregoriou/" target="_blank" rel="noopener">Sausage - Thin (Loukanika)</a>
+            <div class="product-meta">CY, 14 x 210g, Gregoriou</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Sausage - Thin (Loukanika) (CY, 14 x 210g, Gregoriou)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Kythirian%20Olive%20Oil%20Rusks%2015x400g%20(Manna).jpg" alt="Kythirian Olive Oil Rusks">
+          <div class="product-details">
+            <div class="product-name">Kythirian Olive Oil Rusks 15 x 400g</div>
+            <div class="product-meta">Manna</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kythirian Olive Oil Rusks 15 x 400g (Manna)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Sausages Wine (Loukanika Pitsilisima)</div>
+            <div class="product-meta">CY, 11 x 250g</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Sausages Wine (Loukanika Pitsilisima) (CY, 11 x 250g)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Flaouna%20Cheese.jpg" alt="Flaouna Cheese (Loose)">
+          <div class="product-details">
+            <div class="product-name">Flaouna Cheese (Loose)</div>
+            <div class="product-meta">Sold per kg</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Flaouna Cheese (Loose) (Sold per kg)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Lisko-Ravioli.jpg" alt="Ravioli with Cheese">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/ravioli-with-cheese-frozen-20-x-400g-lisko/" target="_blank" rel="noopener">Ravioli with Cheese</a>
+            <div class="product-meta">Frozen, 20 x 400g, Lisko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Ravioli with Cheese (Frozen, 20 x 400g, Lisko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/12x250g%20Cookies%20Sesame(No.132)%20(Johnsof).jpg" alt="Sesame Cookies">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/cookies-sesame-250g-johnsof/" target="_blank" rel="noopener">Sesame Cookies</a>
+            <div class="product-meta">12 x 250g</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Sesame Cookies (12 x 250g)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2026/03/FARINA-CYPRUS-FLOUR-1x10x1Kg-1.png" alt="Flour - Farina Cyprus">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/flour-farina-cyprus-10-x-1kg-thriambos/" target="_blank" rel="noopener">Flour - Farina Cyprus</a>
+            <div class="product-meta">10 x 1kg, Thriambos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Flour - Farina Cyprus (10 x 1kg, Thriambos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Macaroni%20No.2%20(Pastitsio%2C%2024%20x%20500g%2C%20Misko)" alt="Macaroni No.2">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/macaroni-no2-pastitsio-24-x-500g-misko/" target="_blank" rel="noopener">Macaroni No.2</a>
+            <div class="product-meta">Pastitsio, 24 x 500g, Misko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Macaroni No.2 (Pastitsio, 24 x 500g, Misko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Orzo%20(Kritharaki%2C%2020%20x%20500g%2C%20Misko)" alt="Orzo">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/orzo-kritharaki-20-x-500g-misko/" target="_blank" rel="noopener">Orzo</a>
+            <div class="product-meta">Kritharaki, 20 x 500g, Misko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Orzo (Kritharaki, 20 x 500g, Misko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/05/Pastourma%208%20x%20300g%20v_p%20(Grigoriou).png" alt="Pastourma">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/pastourma-8-x-300g-vp-grigoriou/" target="_blank" rel="noopener">Pastourma</a>
+            <div class="product-meta">8 x 300g, Grigoriou</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Pastourma (8 x 300g, Grigoriou)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Lemon%20Squash%2012x1L%20(Kean).png" alt="Lemon Squash">
+          <div class="product-details">
+            <div class="product-name">Lemon Squash</div>
+            <div class="product-meta">12 x 1L, Kean</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Lemon Squash (12 x 1L, Kean)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Lentils%20Fine%20Greek%20(%203Alfa%20)%20500g.jpg" alt="Lentils - Fine">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/lentils-fine-500g-3-alfa/" target="_blank" rel="noopener">Lentils - Fine</a>
+            <div class="product-meta">12 x 500g, 3Alfa</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Lentils - Fine (12 x 500g, 3Alfa)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/07/Vermicelli%20cut%20Fides%2012%20x%20500%20Makvel.png" alt="Vermicelli">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/vermicelli-fides-12-x-500g-makvel/" target="_blank" rel="noopener">Vermicelli</a>
+            <div class="product-meta">Fides, 12 x 500g, Makvel</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Vermicelli (Fides, 12 x 500g, Makvel)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Flaouna%20-%20Greek%20Cheese.jpg" alt="Flaouna - Greek Cheese">
+          <div class="product-details">
+            <div class="product-name">Flaouna - Greek Cheese</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Flaouna - Greek Cheese"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2024/04/Kalamata-Olives-Whole-1.jpg" alt="Kalamata Olives - Whole Giant">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/kalamata-olives-whole-giant-10kg/" target="_blank" rel="noopener">Kalamata Olives - Whole Giant</a>
+            <div class="product-meta">12kg</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kalamata Olives - Whole Giant (12kg)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2026/05/Kalamata%20Olives%20Pitted.jpg" alt="Kalamata Olives Pitted Jumbo">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/kalamata-olives-pitted-jumbo-10kg-tin/" target="_blank" rel="noopener">Kalamata Olives Pitted Jumbo 10kg Tin</a>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kalamata Olives Pitted Jumbo 10kg Tin"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Olive Oil Extra Virgin 5lt Tin</div>
+            <div class="product-meta">Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Olive Oil Extra Virgin 5lt Tin (Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Walnut%20Sweet%20Preserve%20(420g%2C%20Katerina)" alt="Walnut Sweet Preserve">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/walnut-sweet-preserve-420g-katerina/" target="_blank" rel="noopener">Walnut Sweet Preserve</a>
+            <div class="product-meta">420g, Katerina</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Walnut Sweet Preserve (420g, Katerina)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Kalamata Olives Whole ExLarge 4 x 2kg dw Pet in brine</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Kalamata Olives Whole ExLarge 4 x 2kg dw Pet in brine"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://aristonfoods.co.uk/wp-content/uploads/2026/03/Beans%20Giant%2020%20x%20500g%203Alfa.jpg" alt="Giant Beans Greek">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/giant-beans-greek-20-x-500g-3alfa/" target="_blank" rel="noopener">Giant Beans Greek 20 x 500g</a>
+            <div class="product-meta">3Alfa</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Giant Beans Greek 20 x 500g (3Alfa)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Green Olives - Cracked</div>
+            <div class="product-meta">2kg Tub, El.Mar</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Green Olives - Cracked (2kg Tub, El.Mar)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Green%20Eye%20Beans-Louvi-%20Frozen%2012%20x%20500g%20(Lisko).jpg" alt="Green Eye Beans-Louvi">
+          <div class="product-details">
+            <div class="product-name">Green Eye Beans-Louvi- Frozen 12 x 500g</div>
+            <div class="product-meta">Lisko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Green Eye Beans-Louvi- Frozen 12 x 500g (Lisko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Olive Oil  Extra Virgin 12 x 1lt</div>
+            <div class="product-meta">Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Olive Oil  Extra Virgin 12 x 1lt (Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Honey%20-%20Cretan%20(12%20x%20450g%2C%20Aoritiko)" alt="Honey - Cretan">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/honey-cretan-12-x-450g-aoritiko/" target="_blank" rel="noopener">Honey - Cretan</a>
+            <div class="product-meta">12 x 450g, Aoritiko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Honey - Cretan (12 x 450g, Aoritiko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Halva%20with%20Almonds%20-%20Tub%20(18%20x%20400g%2C%20Mezap)" alt="Halva with Almonds - Tub">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/halva-with-almonds-tub-18-x-400g-mezap/" target="_blank" rel="noopener">Halva with Almonds - Tub</a>
+            <div class="product-meta">18 x 400g, Mezap</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Halva with Almonds - Tub (18 x 400g, Mezap)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Mehlepi%20Seeds%2024x10g%20(Nobel).png" alt="Mehlepi Seeds">
+          <div class="product-details">
+            <div class="product-name">Mehlepi Seeds</div>
+            <div class="product-meta">24 x 10g, Nobel</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mehlepi Seeds (24 x 10g, Nobel)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Masticha%2024x10g%20(Nobel).jpg" alt="Masticha">
+          <div class="product-details">
+            <div class="product-name">Masticha</div>
+            <div class="product-meta">24 x 10g, Nobel</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Masticha (24 x 10g, Nobel)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Greek%20Coffee%20(15%20x%20194g%2C%20Loumidis)" alt="Greek Coffee">
+          <div class="product-details">
+            <a class="product-name" href="https://aristonfoods.co.uk/product/greek-coffee-15-x-194g-loumidis-2/" target="_blank" rel="noopener">Greek Coffee</a>
+            <div class="product-meta">15 x 194g, Loumidis</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Greek Coffee (15 x 194g, Loumidis)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Halva%20with%20Vanilla%20Flavour%20-%20Tub%20(18%20x%20400g%2C%20Mezap)" alt="Halva with Vanilla Flavour - Tub">
+          <div class="product-details">
+            <div class="product-name">Halva with Vanilla Flavour - Tub</div>
+            <div class="product-meta">18 x 400g, Mezap</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Halva with Vanilla Flavour - Tub (18 x 400g, Mezap)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Panna for Seftalia Pork</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Panna for Seftalia Pork"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Dakos%20Cretan%20(12%20Half-Rolls%2C%2015%20x%20600g%2C%20Manna901)" alt="Dakos Cretan 12 Half -Rolls 15 x 600g">
+          <div class="product-details">
+            <div class="product-name">Dakos Cretan 12 Half -Rolls 15 x 600g</div>
+            <div class="product-meta">Manna901</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Dakos Cretan 12 Half -Rolls 15 x 600g (Manna901)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Anari%20-%20Dry%20-%20Vacuum%20Packs%20(1%20x%206kg%2C%20Anthos)" alt="Anari - Dry - Vacuum Packs">
+          <div class="product-details">
+            <div class="product-name">Anari - Dry - Vacuum Packs</div>
+            <div class="product-meta">1 x 6kg, Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Anari - Dry - Vacuum Packs (1 x 6kg, Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Artichokes%20-%20Frozen%20(12%20x%20600g%2C%20Barbastathis)" alt="Artichokes - Frozen">
+          <div class="product-details">
+            <div class="product-name">Artichokes - Frozen</div>
+            <div class="product-meta">12 x 600g, Barbastathis</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Artichokes - Frozen (12 x 600g, Barbastathis)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Bougatsa%20-%20Cream%20(12%20x%20450g%2C%20XRISI%20ZIMI)" alt="Bougatsa - Cream">
+          <div class="product-details">
+            <div class="product-name">Bougatsa - Cream</div>
+            <div class="product-meta">12x450g, XRISI ZIMI</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Bougatsa - Cream (12x450g, XRISI ZIMI)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Anari%20-%20Fresh%20(Vacuum%20Packs%2C%201%20x%207kg%2C%20Bougiouklakis)" alt="Anari - Fresh">
+          <div class="product-details">
+            <div class="product-name">Anari - Fresh</div>
+            <div class="product-meta">Vacuum Packs, 1 x 7kg, Bougiouklakis</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Anari - Fresh (Vacuum Packs, 1 x 7kg, Bougiouklakis)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Mini%20Sausage%20Pastries%20(10%20x%20800g%2C%20XZ)" alt="Mini Sausage Pastries">
+          <div class="product-details">
+            <div class="product-name">Mini Sausage Pastries</div>
+            <div class="product-meta">10 x 800g, XZ</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mini Sausage Pastries (10 x 800g, XZ)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Sesame%20Seeds%20(14%20x%20400g%2C%20Anthos)" alt="Sesame Seeds">
+          <div class="product-details">
+            <div class="product-name">Sesame Seeds</div>
+            <div class="product-meta">14 x 400g, Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Sesame Seeds (14 x 400g, Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Beans%20Alubia%20(12%20x%20500g%2C%20Anthos)" alt="Beans Alubia 12x500g Anthos">
+          <div class="product-details">
+            <div class="product-name">Beans Alubia 12x500g Anthos</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Beans Alubia 12x500g Anthos"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Vanilla%20Sugar%20Sachet%20(10%20x%205g)" alt="Vanilla Sugar Sachet">
+          <div class="product-details">
+            <div class="product-name">Vanilla Sugar Sachet</div>
+            <div class="product-meta">10 x 5g</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Vanilla Sugar Sachet (10 x 5g)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Filo%20Pastry%20for%20Sweet%20Pies%20(12%20x%20450g%2C%20XZ" alt="Filo Pastry for Sweet Pies 12 x 450g">
+          <div class="product-details">
+            <div class="product-name">Filo Pastry for Sweet Pies 12 x 450g</div>
+            <div class="product-meta">XZ</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Filo Pastry for Sweet Pies 12 x 450g (XZ)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Country%20Filo%20Pie%20-%20Stick%20-%20Vegan%20Potato%20(40%20x%20215g)" alt="Country Filo Pie - Stick - Vegan Potato">
+          <div class="product-details">
+            <div class="product-name">Country Filo Pie - Stick - Vegan Potato</div>
+            <div class="product-meta">40 x 215g</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Country Filo Pie - Stick - Vegan Potato (40 x 215g)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Macaroni%20No.3%20(Pastitsio%2C%2024%20x%20500g%2C%20Misko)" alt="Macaroni No.3">
+          <div class="product-details">
+            <div class="product-name">Macaroni No.3</div>
+            <div class="product-meta">Pastitsio, 24 x 500g, Misko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Macaroni No.3 (Pastitsio, 24 x 500g, Misko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Greek%20Coffee%20-%20Classic%20(10%20x%20200g%2C%20Charalambous)" alt="Greek Coffee - Classic">
+          <div class="product-details">
+            <div class="product-name">Greek Coffee - Classic</div>
+            <div class="product-meta">10 x 200g, Charalambous</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Greek Coffee - Classic (10 x 200g, Charalambous)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Rose%20Cordial%20(12%20x%201L%2C%20Kean)" alt="Rose Cordial">
+          <div class="product-details">
+            <div class="product-name">Rose Cordial</div>
+            <div class="product-meta">12 x 1L, Kean</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Rose Cordial (12 x 1L, Kean)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Linguine - No11</div>
+            <div class="product-meta">24 x 500g, Misko</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Linguine - No11 (24 x 500g, Misko)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Orange%20Blossom%20Water%20(20%20x%20500ml%2C%20Amalia)" alt="Orange Blossom Water 20 x 500ml">
+          <div class="product-details">
+            <div class="product-name">Orange Blossom Water 20 x 500ml</div>
+            <div class="product-meta">Amalia</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Orange Blossom Water 20 x 500ml (Amalia)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Mint Dry 6 x 150g Anthos</div>
+            <div class="product-meta"></div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Mint Dry 6 x 150g Anthos"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <div class="product-details">
+            <div class="product-name">Yoghurt</div>
+            <div class="product-meta">Cypriot</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Yoghurt (Cypriot)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Macaroni%20-%20Mezzani%20'A'%20(12%20x%20500g%2C%20Mitsides)" alt="Macaroni - Mezzani &#x27;A&#x27;">
+          <div class="product-details">
+            <div class="product-name">Macaroni - Mezzani &#x27;A&#x27;</div>
+            <div class="product-meta">12 x 500g, Mitsides</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Macaroni - Mezzani &#x27;A&#x27; (12 x 500g, Mitsides)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Pourgouri%20(14%20x%20500g%2C%20Anthos)" alt="Pourgouri">
+          <div class="product-details">
+            <div class="product-name">Pourgouri</div>
+            <div class="product-meta">14 x 500g, Anthos</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Pourgouri (14 x 500g, Anthos)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Oregano-1kg.jpg" alt="Oregano">
+          <div class="product-details">
+            <div class="product-name">Oregano</div>
+            <div class="product-meta">1kg</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Oregano (1kg)"></td>
+    </tr>
+
+    <tr>
+      <td class="product-cell">
+        <div class="product-inner">
+          <img class="product-img" src="https://raw.githubusercontent.com/Aristonfoods/orders/main/images/Afroza%20(230g%20x%2024%2C%20Amalia)" alt="Afroza 230g  x 24">
+          <div class="product-details">
+            <div class="product-name">Afroza 230g  x 24</div>
+            <div class="product-meta">Amalia</div>
+          </div>
+        </div>
+      </td>
+      <td class="qty-cell"><input type="number" min="0" step="1" placeholder="0" class="qty-input" data-product="Afroza 230g  x 24 (Amalia)"></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div class="notes-section">
+  <div class="notes-label">Notes / Special requests</div>
+  <textarea class="notes-input" id="notes" placeholder="Any special requests or notes..."></textarea>
+</div>
+
+<button class="send-btn" onclick="sendOrder()">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.116 1.523 5.844L0 24l6.337-1.501A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.013-1.374l-.36-.214-3.727.882.938-3.62-.234-.373A9.818 9.818 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/></svg>
+  Send Order via WhatsApp
+</button>
+
+<script>
+document.querySelectorAll('.qty-input').forEach(input => {
+  input.addEventListener('input', function() {
+    updateCount();
+    if (this.value && this.value != '0') { this.setAttribute('value', this.value); }
+    else { this.removeAttribute('value'); }
+  });
+});
+
+function updateCount() {
+  let count = 0;
+  document.querySelectorAll('.qty-input').forEach(input => {
+    if (input.value && parseFloat(input.value) > 0) count++;
+  });
+  document.getElementById('order-count').textContent = count + (count === 1 ? ' item' : ' items');
+}
+
+function sendOrder() {
+  let lines = [];
+  document.querySelectorAll('.qty-input').forEach(input => {
+    const qty = parseFloat(input.value);
+    if (qty > 0) {
+      const product = input.getAttribute('data-product');
+      lines.push('• ' + qty + ' x ' + product);
+    }
+  });
+  if (lines.length === 0) { alert('Please add quantities to at least one product.'); return; }
+  const notes = document.getElementById('notes').value;
+  let message = "ORDER - Greek Orthodox Church of the Virgin Mary\nDate: " + new Date().toLocaleDateString('en-GB') + "\n\n" + lines.join('\n');
+  if (notes) message += '\n\nNotes: ' + notes;
+  window.open('https://wa.me/?text=' + encodeURIComponent(message), '_blank');
+}
+</script>
+</body>
+</html>
